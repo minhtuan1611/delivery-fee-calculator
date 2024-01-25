@@ -3,24 +3,42 @@
   margin: 0;
 }
 
+/* Body styles */
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: linear-gradient(to right, #abbdc6, #3799e4);
-  margin: 0;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(45deg, #fff, #18a8d0, #e784e0);
+  background-size: 300% 300%;
+  animation: color 12s ease-in-out infinite;
 }
 
+/* Gradient animation */
+@keyframes color {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* Heading styles */
 h1,
 h2,
 h3,
 h4,
 h5 {
-  font-family: 'Montserrat';
   text-align: center;
   color: #333;
   margin: 20px 0;
 }
 
+/* Button styles */
 .calculate-button {
   display: block;
   margin: 0 auto;
@@ -31,10 +49,9 @@ h5 {
   color: black;
   letter-spacing: 2px;
   font-family: 20px;
-  cursor: pointer; /* Add cursor property to make it clear it's clickable */
+  cursor: pointer;
 }
 
-/* Add these styles to disable the button */
 .calculate-button:disabled {
   cursor: not-allowed;
   background-color: #ccc;
@@ -42,13 +59,19 @@ h5 {
   border: 1px solid #999;
 }
 
-.calculate-button::before {
+.calculate-button::before,
+.calculate-button:hover:before,
+.calculate-button:after,
+.calculate-button:hover:after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.calculate-button::before {
   background: #3799e4;
   z-index: -1;
   transition: transform 0.5s;
@@ -57,18 +80,11 @@ h5 {
 }
 
 .calculate-button:hover:before {
-  transition: transform 0.5s;
   transform-origin: bottom left;
   transform: scale(1);
 }
 
 .calculate-button:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background: transparent;
   border: 2px solid #25c1ed;
   box-sizing: border-box;
@@ -79,15 +95,14 @@ h5 {
 }
 
 .calculate-button:hover:after {
-  transition: transform 0.5s;
   transform-origin: bottom right;
   transform: scale(0);
 }
 
-/* Container Styles */
+/* Container styles */
 .delivery-fee-calculator {
   width: 400px;
-  height: 600px;
+  height: 450px;
   margin: 80px auto 0;
   border-radius: 16px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
@@ -97,9 +112,14 @@ h5 {
   background-attachment: fixed;
   background-size: cover;
   background-color: white;
+  transition: height 0.3s ease-in-out;
 }
 
-/* Form Styles */
+.delivery-fee-calculator.expanded {
+  height: 600px;
+}
+
+/* Form styles */
 form {
   display: flex;
   flex-direction: column;
@@ -107,7 +127,7 @@ form {
   align-items: center;
 }
 
-/* Input Styles */
+/* Input styles */
 .input-container {
   margin: 0 0 10px 0;
   display: flex;
@@ -115,7 +135,7 @@ form {
   align-items: center;
 }
 
-/* Other Input Styles */
+/* Other input styles */
 .input-row {
   display: flex;
   flex-direction: row;
@@ -146,6 +166,7 @@ form {
   width: 1.5rem;
 }
 
+/* Fee styles */
 .Delivery-fee {
   font-size: 18px;
   padding: 10px 15px;
@@ -156,12 +177,15 @@ form {
 
 .fee-container {
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 15px;
   border: 1px solid #123048;
   border-radius: 8px;
   box-shadow: rgba(17, 12, 46, 0.1) 0px 3px 6px 0px;
   text-align: center;
-  position: relative; /* Enable positioning of tooltip */
+  position: relative;
+  width: 320px;
 }
 
 .fee-text {
@@ -188,7 +212,7 @@ form {
 
 .tooltip {
   position: absolute;
-  top: 40px; /* Adjust for proper positioning */
+  top: 20px;
   right: 0;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -197,13 +221,14 @@ form {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 6px 0px;
   font-size: 14px;
   color: #333;
-  display: none; /* Initially hidden */
+  display: none;
 }
 
 .tooltip.open {
-  display: block; /* Show tooltip when open */
+  display: block;
 }
 
+/* Input styles */
 input {
   padding: 12px;
   margin-bottom: 16px;
@@ -219,11 +244,11 @@ input:focus {
   box-shadow: #994d1c;
 }
 
-/* Navbar Styles */
+/* Navbar styles */
 .navbar {
   width: 100%;
   height: 50px;
-  background: #f7f7f7;
+  background: #fff;
   border-bottom: 1px solid #555;
   display: flex;
   align-items: center;
@@ -237,6 +262,11 @@ input:focus {
 .logo-container span {
   font-weight: 500;
   cursor: pointer;
+}
+
+img {
+  height: 2.5rem;
+  width: 4rem;
 }
 
 .links-container {
@@ -256,7 +286,7 @@ input:focus {
   color: rgba(14, 34, 14, 0.8);
 }
 
-/* Responsive Styles */
+/* Responsive styles */
 @media screen and (min-width: 1560px) {
   .container {
     margin-top: 160px;

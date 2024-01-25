@@ -1,6 +1,7 @@
 import React from 'react'
-import './App.css'
+import '../../App.css'
 import * as data from './links.json'
+import logo from '../../Asset/Image/logo.png'
 
 const linksString = JSON.stringify(data)
 const links = JSON.parse(linksString).links
@@ -13,13 +14,11 @@ type Link = {
 const Links: React.FC<{ links: Link[] }> = ({ links }) => {
   return (
     <div className="links-container">
-      {links.map((link: Link) => {
-        return (
-          <div key={link.href} className="link">
-            <a href={link.href}>{link.label}</a>
-          </div>
-        )
-      })}
+      {links.map((link: Link) => (
+        <div key={link.href} className="link">
+          <a href={link.href}>{link.label}</a>
+        </div>
+      ))}
     </div>
   )
 }
@@ -28,8 +27,9 @@ const Nav: React.FC<{}> = () => {
   return (
     <nav className="navbar">
       <div className="logo-container">
-        <img src="./logo.png" alt="Logo" />
-        Logo
+        <a href="https://wolt.com/en">
+          <img src={logo} alt="Logo" />
+        </a>
       </div>
       <Links links={links} />
     </nav>

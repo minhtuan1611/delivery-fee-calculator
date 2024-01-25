@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css' // Import your CSS file
+import '../App.css'
 
 interface FeeProps {
   fee: number
@@ -8,12 +8,8 @@ interface FeeProps {
 const Fee: React.FC<FeeProps> = ({ fee }) => {
   const [isTooltipOpen, setIsTooltipOpen] = React.useState(false)
 
-  const handleTooltipOpen = () => {
-    setIsTooltipOpen(true)
-  }
-
-  const handleTooltipClose = () => {
-    setIsTooltipOpen(false)
+  const handleTooltipToggle = () => {
+    setIsTooltipOpen(!isTooltipOpen)
   }
 
   return (
@@ -21,8 +17,8 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
       <p className="fee-text">Delivery Fee: {fee.toFixed(2)} €</p>
       <button
         className="info-icon"
-        onClick={handleTooltipOpen}
-        onMouseLeave={handleTooltipClose}
+        onClick={handleTooltipToggle}
+        style={{ top: '10px' }}
       >
         ℹ️
       </button>
@@ -33,6 +29,10 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
           <li>Order value</li>
           <li>Time of day</li>
           <li>Number of items in the order</li>
+          <li>
+            But one thing I can sure that... The more you buy the cheaper
+            delivery fee you get 😄
+          </li>
         </ul>
       </div>
     </div>

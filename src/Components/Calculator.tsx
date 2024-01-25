@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import Fee from './Fee'
 import Input from './Input'
+import '../App.css'
 
 const Calculator: React.FC = () => {
+  const Button = 'Calculate Delivery Price'
   const [inputValues, setInputValues] = useState({
     cartValue: 0,
     distance: 0,
@@ -11,6 +13,7 @@ const Calculator: React.FC = () => {
   })
 
   const [calculatedFee, setCalculatedFee] = useState<number | null>(null)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -18,7 +21,6 @@ const Calculator: React.FC = () => {
   ) => {
     const value = event.target.value
 
-    // Ensure only numeric values are updated
     if (!isNaN(Number(value))) {
       setInputValues((prevValues) => ({
         ...prevValues,
@@ -36,6 +38,7 @@ const Calculator: React.FC = () => {
       new Date(orderTime)
     )
     setCalculatedFee(fee)
+    setIsExpanded(true)
   }
 
   const calculateFee = (
@@ -45,53 +48,35 @@ const Calculator: React.FC = () => {
     orderTime: Date
   ) => {
     let fee = 0
-
-    // Rule 5: Delivery is free when the cart value is equal or more than 200€
     if (cartValue >= 200) {
       return fee
     }
-
-    // Rule 4: During the Friday rush (3 - 7 PM), multiply the fee by 1.2x
     const isFridayRush =
       orderTime.getDay() === 5 &&
       orderTime.getHours() >= 15 &&
       orderTime.getHours() < 19
     const rushMultiplier = isFridayRush ? 1.2 : 1
-
-    // Rule 1: Small order surcharge
     if (cartValue < 10) {
-      fee += 10 - cartValue // surcharge is the difference between 10 and cartValue
+      fee += 10 - cartValue
     }
-
-    // Rule 2: Base fee for the first 1000 meters
     fee += 2
-
-    // Rule 2: Additional fee for every 500 meters beyond the first 1000 meters
     const additionalDistance = Math.max(0, distance - 1000)
     fee += Math.ceil(additionalDistance / 500) * 1
-
-    // Rule 3: Surcharge for items
     if (numberOfItems >= 5) {
       const itemSurcharge = (numberOfItems - 5) * 0.5
       fee += itemSurcharge
-
-      // Additional "bulk" fee for more than 12 items
       if (numberOfItems > 12) {
         fee += 1.2
       }
     }
-
-    // Rule 6: Fee cannot be more than 15€, including surcharges
     fee = Math.min(15, fee)
-
-    // Apply rush hour multiplier
     fee *= rushMultiplier
 
     return fee
   }
 
   return (
-    <div>
+    <div className={`delivery-fee-calculator ${isExpanded ? 'expanded' : ''}`}>
       <h2>Delivery Fee Calculator</h2>
       <Input
         cartValue={inputValues.cartValue}
@@ -108,7 +93,7 @@ const Calculator: React.FC = () => {
           (value) => isNaN(Number(value)) || value === 0
         )}
       >
-        Calculate Delivery Price
+        {Button}
       </button>
 
       {calculatedFee !== null && <Fee fee={calculatedFee} />}
