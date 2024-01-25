@@ -1,11 +1,12 @@
 import React from 'react'
 import './App.css'
-import Calculator from './Calculator'
-import Header from './Header'
+import Calculator from './Components/Calculator'
+import Nav from './Nav'
+
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Nav></Nav>
       <div className="delivery-fee-calculator">
         <Calculator />
       </div>

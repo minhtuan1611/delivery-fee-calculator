@@ -1,0 +1,16 @@
+{
+  "links": [
+    {
+      "label": "Home",
+      "href": "https://wolt.com/en"
+    },
+    {
+      "label": "About",
+      "href": "https://explore.wolt.com/en/fin/about"
+    },
+    {
+      "label": "Contact",
+      "href": "https://explore.wolt.com/en/fin/contact"
+    }
+  ]
+}
