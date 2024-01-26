@@ -1,17 +1,11 @@
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState } from 'react'
 import Fee from './Fee'
 import Input from './Input'
 import '../App.css'
 
-interface InputValues {
-  cartValue: number
-  distance: number
-  numberOfItems: number
-  orderTime: Date
-}
-
 const Calculator: React.FC = () => {
-  const [inputValues, setInputValues] = useState<InputValues>({
+  const Button = 'Calculate Delivery Price'
+  const [inputValues, setInputValues] = useState({
     cartValue: 0,
     distance: 0,
     numberOfItems: 0,
@@ -22,15 +16,17 @@ const Calculator: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const handleChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    inputName: keyof InputValues
+    event: React.ChangeEvent<HTMLInputElement>,
+    inputName: string
   ) => {
     const value = event.target.value
 
-    setInputValues((prevValues) => ({
-      ...prevValues,
-      [inputName]: parseFloat(value),
-    }))
+    if (!isNaN(Number(value))) {
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        [inputName]: parseFloat(value),
+      }))
+    }
   }
 
   const handleCalculateFee = () => {
@@ -75,25 +71,24 @@ const Calculator: React.FC = () => {
     }
     fee = Math.min(15, fee)
     fee *= rushMultiplier
+
     return fee
   }
 
   return (
     <div className={`delivery-fee-calculator ${isExpanded ? 'expanded' : ''}`}>
       <h2>Delivery Fee Calculator</h2>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <Input inputValues={inputValues} handleChange={handleChange} />
+      <Input inputValues={inputValues} handleChange={handleChange} />
 
-        <button
-          className="calculate-button"
-          onClick={handleCalculateFee}
-          disabled={Object.values(inputValues).some(
-            (value) => isNaN(Number(value)) || value === 0
-          )}
-        >
-          Calculate Delivery Price
-        </button>
-      </form>
+      <button
+        className="calculate-button"
+        onClick={handleCalculateFee}
+        disabled={Object.values(inputValues).some(
+          (value) => isNaN(Number(value)) || value === 0
+        )}
+      >
+        {Button}
+      </button>
 
       {calculatedFee !== null && <Fee fee={calculatedFee} />}
     </div>

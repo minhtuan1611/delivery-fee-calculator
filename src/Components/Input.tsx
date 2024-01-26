@@ -13,6 +13,7 @@ interface InputProps {
     inputName: keyof InputValues
   ) => void
 }
+
 interface InputValues {
   cartValue: number
   distance: number
