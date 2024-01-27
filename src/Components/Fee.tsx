@@ -17,13 +17,13 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
       <p className="fee-text">Delivery Fee: {fee.toFixed(2)} €</p>
       <button
         className="info-icon"
-        onClick={handleTooltipToggle}
-        style={{ top: '10px' }}
+        onMouseEnter={handleTooltipToggle}
+        onMouseLeave={handleTooltipToggle}
       >
         ℹ️
       </button>
       <div className={`tooltip${isTooltipOpen ? ' open' : ''}`}>
-        <p>Delivery fees are calculated based on factors such as:</p>
+        <p>The fee is calculated based on factors like:</p>
         <ul>
           <li>Distance to the delivery location</li>
           <li>Order value</li>

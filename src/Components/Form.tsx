@@ -1,4 +1,7 @@
+import React from 'react'
 import { useFormContext } from 'react-hook-form'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { validateProps } from '../utils'
 
 interface FormItemProps {
@@ -8,10 +11,11 @@ interface FormItemProps {
   [key: string]: any
   type?: 'text' | 'number' | 'date'
   suffix?: string
+  icon?: IconDefinition
 }
 
 const Form = (props: FormItemProps) => {
-  const { name, label, formProps, type = 'text', suffix = '', ...rest } = props
+  const { name, label, formProps, type = 'text', icon, ...rest } = props
   const {
     register,
     formState: { errors },
@@ -19,11 +23,14 @@ const Form = (props: FormItemProps) => {
 
   return (
     <div className="form-item">
-      <div className="form-item__input">
-        <label htmlFor={name}>{label}</label>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div className="input-row">
+        <label htmlFor={name} className="input-label">
+          {label}
+        </label>
+        <div>
           {type === 'date' ? (
             <input
+              className="input-field-time"
               type="datetime-local"
               {...register(name, {
                 required: 'Value is required',
@@ -33,12 +40,13 @@ const Form = (props: FormItemProps) => {
             />
           ) : (
             <input
+              className="input-field"
               {...register(name, { ...validateProps, ...formProps })}
               {...rest}
             />
           )}
-          <span className="suffix">{suffix}</span>
         </div>
+        {icon && <FontAwesomeIcon className="input-icon" icon={icon} />}
       </div>
       <div className="form-item__error">
         {errors[name] && <small>{errors[name]?.message as string}</small>}

@@ -5,55 +5,60 @@ import Form from './Form'
 import { IFormValue } from '../service'
 import '../App.css'
 import Loading from './Loading'
+import Fee from './Fee'
+import {
+  faEuroSign,
+  faTruckFast,
+  faCartFlatbed,
+} from '@fortawesome/free-solid-svg-icons'
 
 function Calculator() {
   const methods = useForm<IFormValue<string>>()
   const { handleSubmit } = methods
   const [isLoading, setIsLoading] = useState(false)
   const [shippingFee, setShippingFee] = useState<number | undefined>(undefined)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const handleSubmitButton = async (values: IFormValue<string>) => {
     setIsLoading(true)
     const shipFee = await calculateShippingFee(values)
     setIsLoading(false)
     setShippingFee(shipFee)
+    setIsExpanded(true)
   }
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h3>Delivery Fee Calculator</h3>
-      </header>
+    <div className={`delivery-fee-calculator ${isExpanded ? 'expanded' : ''}`}>
+      <h3>Delivery Fee Calculator</h3>
 
       <FormProvider {...methods}>
         <form
           className="form-wrapper"
           onSubmit={handleSubmit(handleSubmitButton)}
         >
-          <Form suffix="€" name="cartValue" label="Cart Value" />
+          <Form name="cartValue" label="Cart Value:" icon={faEuroSign} />
           <Form
-            suffix="m"
             name="distance"
             formProps={intergerValidateProps}
-            label="Delivery Distance"
+            label="Delivery Distance: (m)"
+            icon={faTruckFast}
           />
           <Form
             name="amount"
-            label="Amount of items"
+            label="Amount of items:"
             formProps={intergerValidateProps}
+            icon={faCartFlatbed}
           />
-          <Form name="time" type="date" label="Time" />
-
-          <button disabled={isLoading} className="submit-btn" type="submit">
+          <Form name="time" type="date" label="Time:" />
+          <button
+            disabled={isLoading}
+            className="calculate-button"
+            type="submit"
+          >
             Calculate delivery price
           </button>
-
-          <div className="shipping-fee">
-            {isLoading && <Loading />}
-            {shippingFee !== undefined && !isLoading && (
-              <p> Delivery price: {shippingFee}€ </p>
-            )}
-          </div>
+          {isLoading && <Loading />}
+          {shippingFee !== undefined && !isLoading && <Fee fee={shippingFee} />}
         </form>
       </FormProvider>
     </div>

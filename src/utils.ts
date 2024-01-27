@@ -38,7 +38,7 @@ export const calculateShippingFee = (
 ): Promise<number> => {
   const { cartValue, distance, amount, time } = convertValuesToNumber(input)
 
-  // The delivery is free (0€) when the cart value is equal or more than 100€.
+  // The delivery is free (0€) when the cart value is equal or more than 200€.
   if (cartValue >= 200) {
     return new Promise((resolve) => {
       setTimeout(() => {
