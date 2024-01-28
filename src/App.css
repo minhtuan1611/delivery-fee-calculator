@@ -5,13 +5,10 @@
 
 /* Body styles */
 body {
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   height: 100vh;
   width: 100%;
-  background: linear-gradient(45deg, #fff, #18a8d0, #e784e0);
-  background-size: 300% 300%;
-  animation: color 8s ease-in-out infinite;
+  background-color: var(--body_background);
+  color: var(body_color);
 }
 
 /* Gradient animation */
@@ -26,7 +23,6 @@ body {
     background-position: 0 50%;
   }
 }
-
 /* Navbar styles */
 .navbar {
   width: 100%;
@@ -76,7 +72,7 @@ h3,
 h4,
 h5 {
   text-align: center;
-  color: #333;
+  color: var(--body_color);
   margin: 20px 0;
 }
 
@@ -114,7 +110,7 @@ h5 {
 }
 
 .calculate-button::before {
-  background: #3799e4;
+  background: var(--button_hover);
   z-index: -1;
   transition: transform 0.5s;
   transform-origin: bottom right;
@@ -128,7 +124,7 @@ h5 {
 
 .calculate-button:after {
   background: transparent;
-  border: 2px solid #25c1ed;
+  border: 2px solid var(--button_border);
   box-sizing: border-box;
   z-index: -1;
   transition: transform 0.5s;
@@ -145,7 +141,7 @@ h5 {
 .delivery-fee-calculator {
   width: 400px;
   height: 450px;
-  margin: 80px auto 0;
+  margin: 5px auto 0;
   border-radius: 16px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   overflow: hidden;
@@ -153,7 +149,7 @@ h5 {
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  background-color: white;
+  background-color: var(--body_form);
   transition: height 0.3s ease-in-out;
 }
 
@@ -228,18 +224,20 @@ form {
   text-align: center;
   position: relative;
   width: 320px;
+  background-color: var(--body_background);
+  color: var(body_color);
 }
 
 .fee-text {
   font-size: 16px;
-  color: #333;
+  color: var(body_color);
 }
 
 .info-icon {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 15px;
-  background-color: #fff;
+  background-color: var(--body_background);
   border: none;
   border-radius: 50%;
   padding: 5px;

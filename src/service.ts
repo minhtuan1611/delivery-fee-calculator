@@ -1,6 +1,6 @@
 export interface IFormValue<T> {
-  cartValue: T;
-  distance: T;
-  amount: T;
-  time: Date;
+  cartValue: T
+  distance: T
+  amount: T
+  time: Date
 }
