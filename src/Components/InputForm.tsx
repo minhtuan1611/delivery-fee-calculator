@@ -2,6 +2,13 @@ import { useFormContext } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { validateProps } from '../utils'
+import {
+  InputRow,
+  InputField,
+  InputFieldDate,
+  InputError,
+  InputLabel,
+} from '../styles'
 
 interface FormItemProps {
   name: string
@@ -21,14 +28,12 @@ const InputForm = (props: FormItemProps) => {
 
   return (
     <div className="form-item">
-      <div className="input-row">
-        <label htmlFor={name} className="input-label">
-          {label}
-        </label>
+      <InputRow>
+        <InputLabel htmlFor={name}>{label}</InputLabel>
         <div>
           {type === 'date' ? (
-            <input
-              className="input-field-time"
+            <InputFieldDate
+              className="input-time"
               type="datetime-local"
               {...register(name, {
                 required: 'Value is required',
@@ -38,7 +43,7 @@ const InputForm = (props: FormItemProps) => {
               data-test-id={name}
             />
           ) : (
-            <input
+            <InputField
               className="input-field"
               {...register(name, { ...validateProps, ...formProps })}
               {...rest}
@@ -47,10 +52,10 @@ const InputForm = (props: FormItemProps) => {
           )}
         </div>
         {icon && <FontAwesomeIcon className="input-icon" icon={icon} />}
-      </div>
-      <div className="form-item__error">
+      </InputRow>
+      <InputError>
         {errors[name] && <small>{errors[name]?.message as string}</small>}
-      </div>
+      </InputError>
     </div>
   )
 }

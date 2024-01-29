@@ -1,5 +1,6 @@
 import React from 'react'
 import '../App.css'
+import { FeeContainer, FeeText } from '../styles'
 
 interface FeeProps {
   fee: number
@@ -13,8 +14,8 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
   }
 
   return (
-    <div className="fee-container" data-test-id="fee">
-      <p className="fee-text">Delivery Fee: {fee.toFixed(2)} €</p>
+    <FeeContainer data-test-id="fee">
+      <FeeText>Delivery Fee: {fee.toFixed(2)} €</FeeText>
       <button
         className="info-icon"
         onMouseEnter={handleTooltipToggle}
@@ -35,7 +36,7 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
           </li>
         </ul>
       </div>
-    </div>
+    </FeeContainer>
   )
 }
 

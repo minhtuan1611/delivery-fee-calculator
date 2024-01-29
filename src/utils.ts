@@ -43,11 +43,7 @@ export const calculateShippingFee = (
 ): Promise<number> => {
   const { cartValue, distance, amount, time } = convertValuesToNumber(input)
   if (cartValue >= 200) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(0)
-      }, 1000)
-    })
+    return Promise.resolve(0)
   }
   const smallOrderSurcharge = Math.max(0, 10 - cartValue)
   const baseShippingFee = smallOrderSurcharge > 0 ? smallOrderSurcharge : 0
@@ -69,6 +65,6 @@ export const calculateShippingFee = (
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(totalFee)
-    }, 1000)
+    }, 250)
   })
 }

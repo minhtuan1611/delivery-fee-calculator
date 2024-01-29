@@ -4,25 +4,23 @@ import { calculateShippingFee, intergerValidateProps } from '../utils'
 import InputForm from './InputForm'
 import { IFormValue } from '../types'
 import '../App.css'
-import Loading from './Loading'
 import Fee from './Fee'
 import {
   faEuroSign,
   faTruckFast,
   faCartFlatbed,
 } from '@fortawesome/free-solid-svg-icons'
+import { FormWrapper, CalculateButton } from '../styles'
 
 function Calculator() {
   const methods = useForm<IFormValue<string>>()
-  const { handleSubmit } = methods
-  const [isLoading, setIsLoading] = useState(false)
+  const { handleSubmit, formState } = methods
+  const { isSubmitting } = formState
   const [shippingFee, setShippingFee] = useState<number | undefined>(undefined)
   const [isExpanded, setIsExpanded] = useState(false)
 
   const handleSubmitButton = async (values: IFormValue<string>) => {
-    setIsLoading(true)
     const shipFee = await calculateShippingFee(values)
-    setIsLoading(false)
     setShippingFee(shipFee)
     setIsExpanded(true)
   }
@@ -32,10 +30,7 @@ function Calculator() {
       <h3>Delivery Fee Calculator</h3>
 
       <FormProvider {...methods}>
-        <form
-          className="form-wrapper"
-          onSubmit={handleSubmit(handleSubmitButton)}
-        >
+        <FormWrapper onSubmit={handleSubmit(handleSubmitButton)}>
           <InputForm name="cartValue" label="Cart Value:" icon={faEuroSign} />
           <InputForm
             name="distance"
@@ -50,16 +45,16 @@ function Calculator() {
             icon={faCartFlatbed}
           />
           <InputForm name="time" type="date" label="Time:" />
-          <button
-            disabled={isLoading}
+          <CalculateButton
+            disabled={isSubmitting}
             className="calculate-button"
             type="submit"
           >
-            Calculate delivery price
-          </button>
-          {isLoading && <Loading />}
-          {shippingFee !== undefined && !isLoading && <Fee fee={shippingFee} />}
-        </form>
+            {isSubmitting ? 'Loading...' : ' Calculate delivery price'}
+          </CalculateButton>
+          {isSubmitting}
+          {shippingFee !== undefined && <Fee fee={shippingFee} />}
+        </FormWrapper>
       </FormProvider>
     </div>
   )
