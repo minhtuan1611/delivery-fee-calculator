@@ -8,7 +8,7 @@ body {
   height: 100vh;
   width: 100%;
   background-color: var(--body_background);
-  color: var(body_color);
+  color: var(--body_color);
 }
 
 /* Gradient animation */
@@ -23,17 +23,8 @@ body {
     background-position: 0 50%;
   }
 }
-/* Navbar styles */
-.navbar {
-  width: 100%;
-  height: 50px;
-  background: #fff;
-  border-bottom: 1px solid #555;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
+/* Navbar styles */
 .logo-container {
   margin-left: 80px;
 }
@@ -76,67 +67,6 @@ h5 {
   margin: 20px 0;
 }
 
-/* Button styles */
-/* .calculate-button {
-  display: block;
-  margin: 0 auto;
-  transform: translate(-0%, -0%);
-  padding: 5px 10px;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: black;
-  letter-spacing: 2px;
-  font-family: 20px;
-  cursor: pointer;
-}
-
-.calculate-button:disabled {
-  cursor: not-allowed;
-  background-color: #ccc;
-  color: #666;
-  border: 1px solid #999;
-}
-
-.calculate-button::before,
-.calculate-button:hover:before,
-.calculate-button:after,
-.calculate-button:hover:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.calculate-button::before {
-  background: var(--button_hover);
-  z-index: -1;
-  transition: transform 0.5s;
-  transform-origin: bottom right;
-  transform: scale(0);
-}
-
-.calculate-button:hover:before {
-  transform-origin: bottom left;
-  transform: scale(1);
-}
-
-.calculate-button:after {
-  background: transparent;
-  border: 2px solid var(--button_border);
-  box-sizing: border-box;
-  z-index: -1;
-  transition: transform 0.5s;
-  transform-origin: top left;
-  transform: scale(1);
-}
-
-.calculate-button:hover:after {
-  transform-origin: bottom right;
-  transform: scale(0);
-} */
-
 /* Container styles */
 .delivery-fee-calculator {
   width: 400px;
@@ -157,14 +87,6 @@ h5 {
   height: 600px;
 }
 
-/* Form styles */
-/* form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-  align-items: center;
-} */
-
 /* Input styles */
 .input-container {
   margin: 0 0 10px 0;
@@ -172,40 +94,6 @@ h5 {
   flex-direction: column;
   align-items: center;
 }
-
-/* Other input styles */
-/* .input-row {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 8px;
-  width: 350px;
-} */
-
-/* .input-label {
-  margin-top: 8.5px;
-  left: 10px;
-  margin-right: 4px;
-  width: 135px;
-} */
-
-/* .input-field {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 15px;
-  width: 160px;
-} */
-
-/* input {
-  padding: 12px;
-  border: 1px solid #083457;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 15px;
-  width: 200px;
-} */
 
 .input-icon {
   margin-top: 7px;
@@ -221,26 +109,6 @@ h5 {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.fee-container {
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 15px;
-  border: 1px solid #123048;
-  border-radius: 8px;
-  box-shadow: rgba(17, 12, 46, 0.1) 0px 3px 6px 0px;
-  text-align: center;
-  position: relative;
-  width: 320px;
-  background-color: var(--body_background);
-  color: var(body_color);
-}
-
-.fee-text {
-  font-size: 16px;
-  color: var(body_color);
 }
 
 .info-icon {
@@ -277,15 +145,6 @@ h5 {
 .tooltip.open {
   display: block;
 }
-
-/* Input styles */
-
-/* .form-item__error {
-  height: 16px;
-  font-size: 14px;
-  color: red;
-  margin-top: -8px;
-} */
 
 /* Responsive styles */
 @media screen and (min-width: 1560px) {
