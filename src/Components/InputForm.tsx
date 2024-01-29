@@ -1,4 +1,3 @@
-import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types'
@@ -10,11 +9,10 @@ interface FormItemProps {
   formProps?: any
   [key: string]: any
   type?: 'text' | 'number' | 'date'
-  suffix?: string
   icon?: IconDefinition
 }
 
-const Form = (props: FormItemProps) => {
+const InputForm = (props: FormItemProps) => {
   const { name, label, formProps, type = 'text', icon, ...rest } = props
   const {
     register,
@@ -37,12 +35,14 @@ const Form = (props: FormItemProps) => {
                 ...formProps,
               })}
               {...rest}
+              data-test-id={name}
             />
           ) : (
             <input
               className="input-field"
               {...register(name, { ...validateProps, ...formProps })}
               {...rest}
+              data-test-id={name}
             />
           )}
         </div>
@@ -55,4 +55,4 @@ const Form = (props: FormItemProps) => {
   )
 }
 
-export default Form
+export default InputForm

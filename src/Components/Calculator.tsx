@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { calculateShippingFee, intergerValidateProps } from '../utils'
-import Form from './Form'
-import { IFormValue } from '../service'
+import InputForm from './InputForm'
+import { IFormValue } from '../types'
 import '../App.css'
 import Loading from './Loading'
 import Fee from './Fee'
@@ -36,20 +36,20 @@ function Calculator() {
           className="form-wrapper"
           onSubmit={handleSubmit(handleSubmitButton)}
         >
-          <Form name="cartValue" label="Cart Value:" icon={faEuroSign} />
-          <Form
+          <InputForm name="cartValue" label="Cart Value:" icon={faEuroSign} />
+          <InputForm
             name="distance"
             formProps={intergerValidateProps}
             label="Delivery Distance: (m)"
             icon={faTruckFast}
           />
-          <Form
+          <InputForm
             name="amount"
             label="Amount of items:"
             formProps={intergerValidateProps}
             icon={faCartFlatbed}
           />
-          <Form name="time" type="date" label="Time:" />
+          <InputForm name="time" type="date" label="Time:" />
           <button
             disabled={isLoading}
             className="calculate-button"

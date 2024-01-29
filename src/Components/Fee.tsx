@@ -13,7 +13,7 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
   }
 
   return (
-    <div className="fee-container">
+    <div className="fee-container" data-test-id="fee">
       <p className="fee-text">Delivery Fee: {fee.toFixed(2)} €</p>
       <button
         className="info-icon"

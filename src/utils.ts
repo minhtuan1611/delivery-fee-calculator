@@ -1,4 +1,4 @@
-import { IFormValue } from './service'
+import { IFormValue } from './types'
 
 export const INTEGER_REGEX = /^\d+$/
 export const FLOAT_REGEX = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/
@@ -33,12 +33,15 @@ export const convertValuesToNumber = (
   }
 }
 
+const isRushTime = (time: Date): boolean => {
+  const date = new Date(time)
+  return date.getDay() === 5 && date.getHours() >= 15 && date.getHours() <= 19
+}
+
 export const calculateShippingFee = (
   input: IFormValue<string>
 ): Promise<number> => {
   const { cartValue, distance, amount, time } = convertValuesToNumber(input)
-
-  // The delivery is free (0€) when the cart value is equal or more than 200€.
   if (cartValue >= 200) {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -46,51 +49,26 @@ export const calculateShippingFee = (
       }, 1000)
     })
   }
+  const smallOrderSurcharge = Math.max(0, 10 - cartValue)
+  const baseShippingFee = smallOrderSurcharge > 0 ? smallOrderSurcharge : 0
 
-  let shippingFee = 0
+  const distanceFee = 2 + Math.max(0, Math.ceil((distance - 1000) / 500))
 
-  // cart value is less than 10€
-  if (cartValue < 10) {
-    shippingFee += 10 - cartValue
-  }
+  const exceedItemFee = Math.max(0, (amount - 4) * 0.5)
 
-  //  first 1000 meters
-  shippingFee += 2
+  const bulkItemFee = amount > 12 ? 1.2 : 0
 
-  // after 1000 meters
-  if (distance > 1000) {
-    const distanceFee = distance - 1000
-    shippingFee += Math.ceil(distanceFee / 500)
-  }
+  const rushTimeMultiplier = isRushTime(time) ? 1.2 : 1
 
-  // number of items is five or more
-  if (amount >= 5) {
-    shippingFee += (amount - 4) * 0.5
-  }
+  const total =
+    (baseShippingFee + distanceFee + bulkItemFee + exceedItemFee) *
+    rushTimeMultiplier
 
-  // extra "bulk" fee applies for more than 12 items of 1,20€
-  if (amount > 12) {
-    shippingFee += 1.2
-  }
-
-  // if Friday from 3 - 7 PM
-  if (isRushTime(time)) {
-    shippingFee = shippingFee * 1.2
-  }
-  const fee = shippingFee > 15 ? 15 : Math.round(shippingFee * 100) / 100
+  const totalFee = total > 15 ? 15 : Math.round(total * 100) / 100
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(fee)
+      resolve(totalFee)
     }, 1000)
   })
-}
-
-const isRushTime = (time: Date): boolean => {
-  // if Friday from 3 - 7 PM
-  const date = new Date(time)
-  if (date.getDay() === 5 && date.getHours() >= 15 && date.getHours() <= 19) {
-    return true
-  }
-  return false
 }
