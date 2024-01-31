@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types'
-import { validateProps } from '../utils'
+import { commonValidationProps } from '../utils'
 import {
   InputRow,
   InputField,
@@ -10,11 +10,16 @@ import {
   InputIcon,
 } from '../styles'
 
+interface ValidationProps {
+  required?: string
+  min?: { value: number; message: string }
+  pattern?: { value: RegExp; message: string }
+}
+
 interface FormItemProps {
   name: string
   label: string
-  formProps?: any
-  [key: string]: any
+  formProps?: ValidationProps
   type?: 'text' | 'number' | 'date'
   icon?: IconDefinition
 }
@@ -36,7 +41,7 @@ const InputForm = (props: FormItemProps) => {
               className="input-time"
               type="datetime-local"
               {...register(name, {
-                required: 'Value is required',
+                ...commonValidationProps,
                 ...formProps,
               })}
               {...rest}
@@ -45,7 +50,7 @@ const InputForm = (props: FormItemProps) => {
           ) : (
             <InputField
               className="input-field"
-              {...register(name, { ...validateProps, ...formProps })}
+              {...register(name, { ...commonValidationProps, ...formProps })}
               {...rest}
               data-test-id={name}
             />

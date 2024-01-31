@@ -3,22 +3,27 @@ import { IFormValue } from './types'
 export const INTEGER_REGEX = /^\d+$/
 export const FLOAT_REGEX = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/
 
-export const validateProps = {
+export const commonValidationProps = {
   required: 'Value is required',
   min: {
     value: 0,
     message: 'Value must be greater than 0',
   },
+}
+
+export const floatValidationProps = {
+  ...commonValidationProps,
   pattern: {
     value: FLOAT_REGEX,
     message: 'Value must be a number',
   },
 }
 
-export const intergerValidateProps = {
+export const integerValidationProps = {
+  ...commonValidationProps,
   pattern: {
     value: INTEGER_REGEX,
-    message: 'Value must be a integer',
+    message: 'Value must be an integer',
   },
 }
 
