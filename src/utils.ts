@@ -38,7 +38,7 @@ export const convertValuesToNumber = (
   }
 }
 
-const isRushTime = (time: Date): boolean => {
+export const isRushTime = (time: Date): boolean => {
   const date = new Date(time)
   return date.getDay() === 5 && date.getHours() >= 15 && date.getHours() <= 19
 }
@@ -47,6 +47,10 @@ export const calculateShippingFee = (
   input: IFormValue<string>
 ): Promise<number> => {
   const { cartValue, distance, amount, time } = convertValuesToNumber(input)
+  if (isNaN(time.getTime())) {
+    return Promise.reject(new Error('Invalid time'))
+  }
+
   if (cartValue >= 200) {
     return Promise.resolve(0)
   }
