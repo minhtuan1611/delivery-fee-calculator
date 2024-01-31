@@ -1,5 +1,4 @@
 import { useFormContext } from 'react-hook-form'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { validateProps } from '../utils'
 import {
@@ -8,6 +7,7 @@ import {
   InputFieldDate,
   InputError,
   InputLabel,
+  InputIcon,
 } from '../styles'
 
 interface FormItemProps {
@@ -51,7 +51,7 @@ const InputForm = (props: FormItemProps) => {
             />
           )}
         </div>
-        {icon && <FontAwesomeIcon className="input-icon" icon={icon} />}
+        {icon && <InputIcon className="input-icon" icon={icon} />}
       </InputRow>
       <InputError>
         {errors[name] && <small>{errors[name]?.message as string}</small>}

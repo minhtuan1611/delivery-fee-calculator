@@ -1,9 +1,110 @@
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+export const Tooltip = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 6px 0px;
+  font-size: 14px;
+  color: #333;
+  display: none;
+
+  &.open {
+    display: block;
+  }
+`
+
+export const InfoIcon = styled.button`
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  background-color: var(--body_background);
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #123048;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`
+
+export const StyledH3 = styled.h3`
+  text-align: center;
+  color: var(--body_color);
+  margin: 20px 0;
+`
+
+export const InputIcon = styled(FontAwesomeIcon)`
+  margin-top: 7px;
+  padding-left: 0.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+`
+
+export const LogoContainer = styled.div`
+  margin-left: 80px;
+`
+
+export const LogoLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+`
+
+export const LogoImage = styled.img`
+  height: 2.5rem;
+  width: 4rem;
+`
+
+export const LinksContainer = styled.div`
+  margin-right: 20px;
+  display: flex;
+  width: 300px;
+  justify-content: space-evenly;
+`
+
+export const LinkButton = styled.div`
+  a {
+    text-decoration: none;
+    color: rgb(14, 34, 14);
+
+    &:hover {
+      color: rgba(14, 34, 14, 0.8);
+    }
+  }
+`
+
 export const InputRow = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 8px;
   width: 350px;
+`
+
+export const CalculatorWrapper = styled.div`
+  width: 400px;
+  height: 450px;
+  margin: 5px auto 0;
+  border-radius: 16px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: var(--body_form);
+  transition: height 0.3s ease-in-out;
+
+  &.expanded {
+    height: 600px;
+  }
 `
 export const InputField = styled.input`
   display: flex;

@@ -1,6 +1,5 @@
 import React from 'react'
-import '../App.css'
-import { FeeContainer, FeeText } from '../styles'
+import { FeeContainer, FeeText, InfoIcon, Tooltip } from '../styles'
 
 interface FeeProps {
   fee: number
@@ -16,14 +15,13 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
   return (
     <FeeContainer data-test-id="fee">
       <FeeText>Delivery Fee: {fee.toFixed(2)} €</FeeText>
-      <button
-        className="info-icon"
+      <InfoIcon
         onMouseEnter={handleTooltipToggle}
         onMouseLeave={handleTooltipToggle}
       >
         ℹ️
-      </button>
-      <div className={`tooltip${isTooltipOpen ? ' open' : ''}`}>
+      </InfoIcon>
+      <Tooltip className={`tooltip${isTooltipOpen ? ' open' : ''}`}>
         <p>The fee is calculated based on factors like:</p>
         <ul>
           <li>Distance to the delivery location</li>
@@ -35,7 +33,7 @@ const Fee: React.FC<FeeProps> = ({ fee }) => {
             delivery fee you get 😄
           </li>
         </ul>
-      </div>
+      </Tooltip>
     </FeeContainer>
   )
 }

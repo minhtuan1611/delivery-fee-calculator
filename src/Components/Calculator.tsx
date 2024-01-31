@@ -3,14 +3,18 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { calculateShippingFee, intergerValidateProps } from '../utils'
 import InputForm from './InputForm'
 import { IFormValue } from '../types'
-import '../App.css'
 import Fee from './Fee'
 import {
   faEuroSign,
   faTruckFast,
   faCartFlatbed,
 } from '@fortawesome/free-solid-svg-icons'
-import { FormWrapper, CalculateButton } from '../styles'
+import {
+  FormWrapper,
+  CalculateButton,
+  CalculatorWrapper,
+  StyledH3,
+} from '../styles'
 
 function Calculator() {
   const methods = useForm<IFormValue<string>>()
@@ -26,8 +30,10 @@ function Calculator() {
   }
 
   return (
-    <div className={`delivery-fee-calculator ${isExpanded ? 'expanded' : ''}`}>
-      <h3>Delivery Fee Calculator</h3>
+    <CalculatorWrapper
+      className={`delivery-fee-calculator ${isExpanded ? 'expanded' : ''}`}
+    >
+      <StyledH3>Delivery Fee Calculator </StyledH3>
 
       <FormProvider {...methods}>
         <FormWrapper onSubmit={handleSubmit(handleSubmitButton)}>
@@ -56,7 +62,7 @@ function Calculator() {
           {shippingFee !== undefined && <Fee fee={shippingFee} />}
         </FormWrapper>
       </FormProvider>
-    </div>
+    </CalculatorWrapper>
   )
 }
 
