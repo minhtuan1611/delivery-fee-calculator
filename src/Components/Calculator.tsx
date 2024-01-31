@@ -5,7 +5,7 @@ import {
   integerValidationProps,
   floatValidationProps,
 } from '../utils'
-import InputForm from './InputForm'
+import InputFields from './InputFields'
 import { IFormValue } from '../types'
 import Fee from './Fee'
 import {
@@ -41,25 +41,25 @@ function Calculator() {
 
       <FormProvider {...methods}>
         <FormWrapper onSubmit={handleSubmit(handleSubmitButton)}>
-          <InputForm
+          <InputFields
             name="cartValue"
             label="Cart Value:"
             icon={faEuroSign}
             formProps={floatValidationProps}
           />
-          <InputForm
+          <InputFields
             name="distance"
             formProps={integerValidationProps}
             label="Delivery Distance: (m)"
             icon={faTruckFast}
           />
-          <InputForm
+          <InputFields
             name="amount"
             label="Amount of items:"
             formProps={integerValidationProps}
             icon={faCartFlatbed}
           />
-          <InputForm name="time" type="date" label="Time:" />
+          <InputFields name="time" type="date" label="Time:" />
           <CalculateButton
             disabled={isSubmitting}
             className="calculate-button"
