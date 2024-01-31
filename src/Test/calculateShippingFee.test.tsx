@@ -1,4 +1,4 @@
-import { calculateShippingFee, isRushTime } from './utils'
+import { calculateShippingFee, isRushTime } from '../utils'
 
 describe('calculateShippingFee', () => {
   it('should return 0 for cart values over 200', async () => {
