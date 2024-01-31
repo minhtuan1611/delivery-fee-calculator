@@ -81,7 +81,3 @@ it('should mock rush time during rush hours in Friday', () => {
   const rushTime = new Date('2024-02-02T16:30:00')
   expect(isRushTime(rushTime)).toBe(true)
 })
-
-afterAll(() => {
-  jest.runAllTimers()
-})

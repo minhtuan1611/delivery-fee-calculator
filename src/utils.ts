@@ -35,6 +35,7 @@ export const convertValuesToNumber = (
     cartValue: parseFloat(input.cartValue),
     distance: parseInt(input.distance),
     amount: parseInt(input.amount),
+    time: new Date(input.time),
   }
 }
 
